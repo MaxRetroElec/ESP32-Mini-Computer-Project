@@ -1,10 +1,10 @@
 with open("Doomsday00.wav", "rb") as f:
     data = f.read()
 
-# Header (44 premiers bytes)
+# Header 
 print("HEADER:")
 print(data[:44])
 
-# quelques bytes audio après header
+# passe bytes audio header
 print("\nAUDIO SAMPLE:")
 print(list(data[44:100]))
