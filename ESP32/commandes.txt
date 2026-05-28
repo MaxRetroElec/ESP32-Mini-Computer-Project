@@ -1,0 +1,53 @@
+void setup() {
+  Serial.begin(115200);
+  Serial.println("ESP32 REVIVÉ");
+}
+
+void loop() {}
+
+
+py -m esptool --chip esp32 --port COM4 erase_flash
+
+code : #include <LittleFS.h>
+
+File audio;
+
+void setup() {
+  Serial.begin(115200);
+
+  if (!LittleFS.begin()) {
+    Serial.println("LittleFS failed");
+    return;
+  }
+
+  audio = LittleFS.open("/doomsday00.wav", "r");
+
+  if (!audio) {
+    Serial.println("File not found");
+    return;
+  }
+
+  // 📏 taille du fichier
+  size_t fileSize = audio.size();
+
+  Serial.print("Taille du fichier WAV : ");
+  Serial.print(fileSize);
+  Serial.println(" bytes");
+
+  // sauter header WAV (classique 44 bytes)
+  audio.seek(44);
+}
+
+void loop() {
+  if (!audio) return;
+
+  if (audio.available()) {
+    uint8_t sample = audio.read();
+
+    dacWrite(25, sample);
+
+    delayMicroseconds(125); // ~8 kHz
+  } else {
+    audio.seek(44); // boucle
+  }
+}
