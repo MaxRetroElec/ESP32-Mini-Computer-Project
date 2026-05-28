@@ -1,7 +1,7 @@
 # ESP32 Mini-Computer (MEGA-ESP Computer)
 <br>
 <p align="center">
-  <img src="Images/MAXENIX_LOGO.png" alt="MAXENIX_LOGO" width="60%">
+  <img src="/MAXENIX_LOGO.png" alt="MAXENIX_LOGO" width="60%">
 </p>
 <br>
 <br><br>
