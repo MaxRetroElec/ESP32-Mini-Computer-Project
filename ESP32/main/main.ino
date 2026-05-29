@@ -47,7 +47,7 @@ void loop() {
         bootDone = true;
       }
 
-      soundLoop();  // runtime normal ici
+      soundLoop();
       break;
   }
 }
