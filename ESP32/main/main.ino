@@ -5,6 +5,16 @@
 
 #define BUZZER 21
 
+enum SystemState {
+  BIOS,
+  BOOT
+};
+
+SystemState state = BIOS;
+
+bool biosDone = false;
+bool bootDone = false;
+
 void setup() {
   Serial.begin(115200);
 
@@ -16,12 +26,28 @@ void setup() {
   ledcWriteTone(BUZZER, 0);
   delay(500);
 
-  Bsetup();
-
-  soundSetup();
-  displaySetup();
+  state = BIOS; 
 }
 
 void loop() {
-  soundLoop();
+  switch (state) {
+
+    case BIOS:
+      if (!biosDone) {
+        soundSetup();
+        Bsetup();
+        biosDone = true;
+        state = BOOT;
+      }
+      break;
+
+    case BOOT:
+      if (!bootDone) {
+        displaySetup();
+        bootDone = true;
+      }
+
+      soundLoop();  // runtime normal ici
+      break;
+  }
 }
