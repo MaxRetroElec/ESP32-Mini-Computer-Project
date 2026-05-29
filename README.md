@@ -20,8 +20,11 @@ Temporary Name : MEGA-ESP
 
 Graphics norm for the VDP
 
+- **SCREEN** : 2.8 INCH TFT SCREEN
+- **CONTROLLER** : ILI9341
 - **RESOLUTION** : 320x240
 - **PALETTE** : will be used later.
+- **FORMAT** : RGB565
 
 ## Description
 
